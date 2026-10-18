@@ -256,7 +256,7 @@ export default function CharacterStudio({ apiKey, onOpenLipSync }) {
           <div className="grid gap-5 lg:grid-cols-[270px_minmax(0,1fr)]">
             <aside className={panel + ' p-3 h-fit'}>
               <div className="flex items-center justify-between px-2 py-2 mb-2"><span className="font-bold text-sm">Your episodes</span><button className="text-xs font-semibold text-[#f3518c]" onClick={newEpisode}>+ Add</button></div>
-              {episodes.map(ep => <button key={ep.id} onClick={() => setEpisodeId(ep.id)} className={'w-full text-left rounded-xl p-3 mb-1 border text-sm ' + (ep.id === episodeId ? 'border-[#f3518c]/40 bg-[#f3518c]/10' : 'border-transparent hover:bg-white/5')}><strong className="block truncate">{ep.name}</strong><span className="text-xs text-white/35">{ep.lines?.length || 0} lines</span></button>)}
+              {episodes.map(ep => <button key={ep.id} onClick={() => setEpisodeId(ep.id)} className={'w-full text-left rounded-xl p-3 mb-1 border text-sm ' + (ep.id === episodeId ? 'border-[#f3518c]/40 bg-[#f3518c]/10' : 'border-transparent hover:bg-white/5')}><strong className="block truncate">{ep.name}</strong><span className="text-xs text-white/35">{ep.lines?.length || 0} {(ep.lines?.length || 0) === 1 ? 'line' : 'lines'}</span></button>)}
               <div className="px-2 pt-3 border-t border-white/10 mt-3"><p className="text-xs text-white/40 leading-relaxed">Keep one line per speaker for podcast clips. Upload or record audio for each line before rendering.</p></div>
             </aside>
             {episode && <section className="min-w-0 space-y-4">
