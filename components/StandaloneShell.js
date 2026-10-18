@@ -781,7 +781,7 @@ export default function StandaloneShell({ locale = 'en' }) {
                 </svg>
               </div>
               <span className="text-sm font-bold tracking-tight hidden sm:block text-white">
-                {copy.shell.brand}
+                U+R STUDIO
               </span>
             </div>
           </div>
