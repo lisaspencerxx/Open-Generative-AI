@@ -24,7 +24,7 @@
     "agents-automation": "Agents & Automation"
   },
   "shell": {
-    "brand": "OpenGenerativeAI",
+    "brand": "U+R STUDIO",
     "studioFallback": "Studio",
     "expandSidebar": "Expand sidebar",
     "collapseSidebar": "Collapse sidebar",
@@ -34,7 +34,7 @@
     "settings": "Settings",
     "dropHere": "Drop your media here",
     "dropHereHint": "Images, videos, or audio files",
-    "vadooPromo": "Unrestricted AI Images & Videos → Auto-Publish as YouTube Shorts & TikToks, Earn ↗",
+    "vadooPromo": "Unicorns + Robots · Internal creative tools",
     "dismiss": "Dismiss"
   },
   "settingsModal": {
@@ -55,15 +55,15 @@
     "ariaLabel": "Generation activity and notifications"
   },
   "apiKeyModal": {
-    "title": "Open Generative AI",
+    "title": "U+R STUDIO",
     "subtitlePrefix": "Enter your",
     "subtitleSuffix": "API key to start creating",
     "close": "Close",
-    "label": "API Access Key",
+    "label": "MuAPI Access Key",
     "placeholder": "Paste your key here...",
     "missingKeyError": "Please enter your API key",
     "submit": "Get Started",
     "needKey": "Need a key?",
-    "getOneFree": "Get one free →"
+    "getOneFree": "Get a MuAPI key →"
   }
 }
