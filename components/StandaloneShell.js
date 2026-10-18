@@ -348,11 +348,6 @@ export default function StandaloneShell({ locale = 'en' }) {
   const [showSettings, setShowSettings] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
-  const [showVadooBanner, setShowVadooBanner] = useState(() => {
-    if (typeof window !== 'undefined') return localStorage.getItem('vadoo_banner_dismissed') !== '1';
-    return true;
-  });
-
   // Sidebar Collapsed & Mobile Drawer State
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
     if (typeof window !== 'undefined') return localStorage.getItem('sidebar_collapsed') === 'true';
@@ -671,7 +666,7 @@ export default function StandaloneShell({ locale = 'en' }) {
 
   if (!hasMounted) return (
     <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-      <div className="animate-spin text-[#22d3ee] text-3xl">◌</div>
+      <div className="animate-spin text-[#f3518c] text-3xl">◌</div>
     </div>
   );
 
@@ -689,9 +684,9 @@ export default function StandaloneShell({ locale = 'en' }) {
     >
       {/* Drag Overlay */}
       {isDragging && (
-        <div className="fixed inset-0 z-[100] bg-[#22d3ee]/10 backdrop-blur-md border-4 border-dashed border-[#22d3ee]/50 flex items-center justify-center pointer-events-none transition-all duration-300">
+        <div className="fixed inset-0 z-[100] bg-[#f3518c]/10 backdrop-blur-md border-4 border-dashed border-[#f3518c]/50 flex items-center justify-center pointer-events-none transition-all duration-300">
           <div className="bg-[#0a0a0a] p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col items-center gap-4 scale-110 animate-pulse">
-            <div className="w-20 h-20 bg-[#22d3ee] rounded-2xl flex items-center justify-center">
+            <div className="w-20 h-20 bg-[#f3518c] rounded-2xl flex items-center justify-center">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5">
                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
               </svg>
@@ -701,30 +696,6 @@ export default function StandaloneShell({ locale = 'en' }) {
               <span className="text-sm text-white/40">{copy.shell.dropHereHint}</span>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Vadoo promo banner */}
-      {showVadooBanner && (
-        <div className="flex-shrink-0 w-full bg-indigo-600 flex items-center justify-center px-4 py-2 gap-3 relative z-50">
-          <a
-            href="https://vadoo.tv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[13px] font-bold text-white hover:opacity-80 transition-opacity text-center"
-          >
-            {copy.shell.vadooPromo}
-          </a>
-          <button
-            onClick={() => {
-              setShowVadooBanner(false);
-              localStorage.setItem('vadoo_banner_dismissed', '1');
-            }}
-            className="absolute right-3 text-white/60 hover:text-white transition-colors text-lg leading-none"
-            aria-label={copy.shell.dismiss}
-          >
-            ✕
-          </button>
         </div>
       )}
 
@@ -773,22 +744,21 @@ export default function StandaloneShell({ locale = 'en' }) {
               </div>
             </div>
 
-            {/* Logo & Title */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-[#22d3ee] rounded-lg flex items-center justify-center shadow-lg shadow-[#22d3ee]/20">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <span className="text-sm font-bold tracking-tight hidden sm:block text-white">
-                U+R STUDIO
+            {/* Unicorns + Robots identity — deliberately visible on mobile */}
+            <div className="flex items-center gap-2.5 min-w-0" aria-label="Unicorns and Robots Studio">
+              <span className="flex items-baseline whitespace-nowrap select-none leading-none" aria-hidden="true">
+                <span className="text-[21px] font-black text-white tracking-[-0.09em]">U</span>
+                <span className="text-[20px] font-black text-[#f3518c] mx-0.5">+</span>
+                <span className="text-[21px] font-black text-white tracking-[-0.09em]">R</span>
               </span>
+              <span className="w-px h-5 bg-white/25" aria-hidden="true" />
+              <span className="text-[11px] sm:text-xs font-bold text-white tracking-[0.22em] whitespace-nowrap">STUDIO</span>
             </div>
           </div>
 
           {/* Active Tab Breadcrumb Badge */}
           <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.05] text-xs text-white/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#22d3ee]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#f3518c]" />
             <span className="font-medium text-white/80">
               {tabLabel(activeTab) || copy.shell.studioFallback}
             </span>
@@ -859,7 +829,7 @@ export default function StandaloneShell({ locale = 'en' }) {
                           group relative flex items-center rounded-xl transition-all duration-150 font-semibold
                           ${isCollapsed ? 'h-11 w-11 justify-center mx-auto' : 'px-3 py-2.5 w-full gap-3 text-left'}
                           ${isCategoryActive
-                            ? 'bg-gradient-to-r from-[#22d3ee]/15 to-purple-500/10 text-[#22d3ee] border border-[#22d3ee]/20 shadow-[0_0_15px_rgba(34,211,238,0.08)]'
+                            ? 'bg-gradient-to-r from-[#f3518c]/15 to-purple-500/10 text-[#f3518c] border border-[#f3518c]/20 shadow-[0_0_15px_rgba(243,81,140,0.08)]'
                             : isCategoryOpen
                               ? 'bg-white/[0.06] text-white border border-white/[0.08]'
                               : 'text-white/60 hover:text-white hover:bg-white/[0.04] border border-transparent'
@@ -867,10 +837,10 @@ export default function StandaloneShell({ locale = 'en' }) {
                         `}
                       >
                         {isCategoryActive && (
-                          <span className="absolute left-0 top-2 bottom-2 w-1 bg-gradient-to-b from-[#22d3ee] to-[#a855f7] rounded-r-full shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                          <span className="absolute left-0 top-2 bottom-2 w-1 bg-gradient-to-b from-[#f3518c] to-[#ffe268] rounded-r-full shadow-[0_0_8px_rgba(243,81,140,0.6)]" />
                         )}
 
-                        <span className={`flex-shrink-0 transition-colors ${isCategoryActive ? 'text-[#22d3ee]' : 'text-white/55 group-hover:text-white'}`}>
+                        <span className={`flex-shrink-0 transition-colors ${isCategoryActive ? 'text-[#f3518c]' : 'text-white/55 group-hover:text-white'}`}>
                           {category.icon}
                         </span>
 
@@ -918,15 +888,15 @@ export default function StandaloneShell({ locale = 'en' }) {
                                 className={`
                                   group relative flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[12px] font-medium transition-all duration-150
                                   ${isActive
-                                    ? 'bg-[#22d3ee]/12 text-[#22d3ee] border border-[#22d3ee]/20'
+                                    ? 'bg-[#f3518c]/12 text-[#f3518c] border border-[#f3518c]/20'
                                     : 'text-white/55 hover:text-white hover:bg-white/[0.04] border border-transparent'
                                   }
                                 `}
                               >
                                 {isActive && (
-                                  <span className="absolute -left-[11px] top-2 bottom-2 w-0.5 rounded-full bg-[#22d3ee] shadow-[0_0_7px_rgba(34,211,238,0.7)]" />
+                                  <span className="absolute -left-[11px] top-2 bottom-2 w-0.5 rounded-full bg-[#f3518c] shadow-[0_0_7px_rgba(243,81,140,0.7)]" />
                                 )}
-                                <span className={`flex-shrink-0 ${isActive ? 'text-[#22d3ee]' : 'text-white/45 group-hover:text-white/80'}`}>
+                                <span className={`flex-shrink-0 ${isActive ? 'text-[#f3518c]' : 'text-white/45 group-hover:text-white/80'}`}>
                                   {tab.icon}
                                 </span>
                                 <span className="truncate">{tabLabel(tab.id)}</span>
@@ -952,15 +922,15 @@ export default function StandaloneShell({ locale = 'en' }) {
                       group relative flex items-center rounded-xl transition-all duration-150 text-[13px] font-semibold
                       ${isSidebarCollapsed && !isMobileOpen ? 'h-11 w-11 justify-center mx-auto' : 'px-3 py-2.5 w-full gap-3'}
                       ${activeTab === EXPLORE_APPS_TAB.id
-                        ? 'bg-gradient-to-r from-[#22d3ee]/15 to-purple-500/10 text-[#22d3ee] border border-[#22d3ee]/20'
+                        ? 'bg-gradient-to-r from-[#f3518c]/15 to-purple-500/10 text-[#f3518c] border border-[#f3518c]/20'
                         : 'text-white/60 hover:text-white hover:bg-white/[0.04] border border-transparent'
                       }
                     `}
                   >
                     {activeTab === EXPLORE_APPS_TAB.id && (
-                      <span className="absolute left-0 top-2 bottom-2 w-1 bg-gradient-to-b from-[#22d3ee] to-[#a855f7] rounded-r-full" />
+                      <span className="absolute left-0 top-2 bottom-2 w-1 bg-gradient-to-b from-[#f3518c] to-[#ffe268] rounded-r-full" />
                     )}
-                    <span className={`flex-shrink-0 ${activeTab === EXPLORE_APPS_TAB.id ? 'text-[#22d3ee]' : 'text-white/50 group-hover:text-white'}`}>
+                    <span className={`flex-shrink-0 ${activeTab === EXPLORE_APPS_TAB.id ? 'text-[#f3518c]' : 'text-white/50 group-hover:text-white'}`}>
                       {EXPLORE_APPS_TAB.icon}
                     </span>
                     {(!isSidebarCollapsed || isMobileOpen) && (
@@ -1064,12 +1034,12 @@ export default function StandaloneShell({ locale = 'en' }) {
               key={generation.tabId}
               role="status"
               data-generation-tab={generation.tabId}
-              className="pointer-events-auto flex items-center gap-3 rounded-xl border border-cyan-500/40 bg-white px-3.5 py-3 text-[13px] text-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+              className="pointer-events-auto flex items-center gap-3 rounded-xl border border-pink-500/40 bg-white px-3.5 py-3 text-[13px] text-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
               data-testid="generation-activity"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-cyan-400/40 bg-cyan-50">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-pink-400/40 bg-pink-50">
                 <span
-                  className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-cyan-600/30 border-t-cyan-600"
+                  className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-pink-600/30 border-t-pink-600"
                   aria-hidden="true"
                 />
               </span>
@@ -1088,14 +1058,14 @@ export default function StandaloneShell({ locale = 'en' }) {
               data-notification-tab={notif.tabId}
               className="pointer-events-auto flex items-start gap-3 rounded-xl border bg-white px-3.5 py-3 text-[13px] text-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
               style={{
-                borderColor: notif.type === 'success' ? 'rgba(6,182,212,0.4)' : 'rgba(239,68,68,0.4)',
+                borderColor: notif.type === 'success' ? 'rgba(243,81,140,0.4)' : 'rgba(239,68,68,0.4)',
                 animation: 'slideInRight 280ms cubic-bezier(0.16,1,0.3,1) forwards',
               }}
             >
               <span
                 className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${
                   notif.type === 'success'
-                    ? 'border-cyan-400/40 bg-cyan-50 text-cyan-600'
+                    ? 'border-pink-400/40 bg-pink-50 text-pink-600'
                     : 'border-red-400/40 bg-red-50 text-red-600'
                 }`}
               >
@@ -1134,7 +1104,7 @@ export default function StandaloneShell({ locale = 'en' }) {
                   <button
                     type="button"
                     onClick={() => handleOpenNotification(notif)}
-                    className="mt-1.5 text-[11px] font-bold text-cyan-600 transition-colors hover:text-cyan-700"
+                    className="mt-1.5 text-[11px] font-bold text-pink-600 transition-colors hover:text-pink-700"
                     aria-label={copy.notifications.openResult.replace('{label}', notif.label)}
                   >
                     {copy.notifications.open}
