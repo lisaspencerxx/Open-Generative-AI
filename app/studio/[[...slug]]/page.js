@@ -1,7 +1,7 @@
 import StandaloneShell from '@/components/StandaloneShell';
 
 export const metadata = {
-  title: 'Studio — Open Generative AI',
+  title: 'U+R Studio — Unicorns + Robots',
 };
 
 export default function StudioPage() {
