@@ -1,7 +1,7 @@
 import StandaloneShell from '@/components/StandaloneShell';
 
 export const metadata = {
-  title: 'Studio — Open Generative AI',
+  title: 'U+R Studio — Unicorns + Robots',
 };
 
 // Additive locale route wrapper: reuses the exact same shell component as
