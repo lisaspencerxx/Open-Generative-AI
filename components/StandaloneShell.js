@@ -11,6 +11,11 @@ const DesignAgentStudio = dynamic(() => import('studio').then(mod => mod.DesignA
 });
 import axios from 'axios';
 import ApiKeyModal from './ApiKeyModal';
+
+const CharacterStudio = dynamic(() => import('./CharacterStudio'), {
+  ssr: false,
+  loading: () => <div className="h-full w-full grid place-items-center text-white/40 text-sm">Loading Character Studio…</div>,
+});
 import { getCommonCopy, getLocaleConfig, localizeStudioPath } from '@/lib/locales';
 
 // Tab/category ids, icons, and English `label` fallbacks are stable
@@ -197,6 +202,16 @@ const TABS = [
     )
   },
   {
+    id: 'character-studio',
+    label: 'Character Studio',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="9" cy="8" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2"/>
+        <rect x="16" y="5" width="6" height="9" rx="3"/><path d="M19 14v5m-3 0h6"/>
+      </svg>
+    )
+  },
+  {
     id: 'ai-influencer',
     label: 'AI Influencer Studio',
     icon: (
@@ -208,6 +223,17 @@ const TABS = [
 ];
 
 const NAVIGATION_CATEGORIES = [
+  {
+    id: 'characters',
+    label: 'Characters & Podcasts',
+    tabIds: ['character-studio'],
+    icon: (
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="9" cy="8" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2"/>
+        <rect x="16" y="5" width="6" height="9" rx="3"/><path d="M19 14v5m-3 0h6"/>
+      </svg>
+    )
+  },
   {
     id: 'images',
     label: 'Images',
@@ -945,6 +971,9 @@ export default function StandaloneShell({ locale = 'en' }) {
 
         {/* Studio Content */}
         <div className="flex-1 min-h-0 h-full relative overflow-hidden bg-[#030303]">
+        {activeTab === 'character-studio' && (
+          <CharacterStudio apiKey={apiKey} onOpenLipSync={() => handleTabChange('lipsync')} />
+        )}
         <div className={activeTab === 'image' ? "h-full w-full" : "hidden"}>
           <ImageStudio apiKey={apiKey} locale={locale} droppedFiles={droppedFiles} onFilesHandled={handleFilesHandled} onGenerationStart={makeGenerationStartCallback('image')} onGenerationEnd={makeGenerationEndCallback('image')} onGenerationComplete={makeSuccessCallback('image')} onGenerationError={makeErrorCallback('image')} />
         </div>
