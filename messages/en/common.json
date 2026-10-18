@@ -15,13 +15,15 @@
     "agents": "Agents",
     "design-agent": "Design Agent",
     "apps": "Explore Apps",
-    "ai-influencer": "AI Influencer Studio"
+    "ai-influencer": "AI Influencer Studio",
+    "character-studio": "Character Studio"
   },
   "categories": {
     "images": "Images",
     "video": "Video",
     "audio": "Audio",
-    "agents-automation": "Agents & Automation"
+    "agents-automation": "Agents & Automation",
+    "characters": "Characters & Podcasts"
   },
   "shell": {
     "brand": "U+R STUDIO",
