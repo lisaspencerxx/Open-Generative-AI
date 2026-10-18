@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'Open Generative AI — Free AI Image & Video Studio',
-  description: 'Generate AI images and videos using 200+ models — Flux, Midjourney, Kling, Veo, Seedance and more.',
+  title: 'U+R Studio — Creative Engine | Unicorns + Robots',
+  description: 'The private creative workspace for Unicorns + Robots. Create images, videos, campaigns and cinematic AI content.',
 };
 
 export default async function RootLayout({ children }) {
